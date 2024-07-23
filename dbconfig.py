@@ -1,14 +1,17 @@
 import pymysql
+
+
 class dbconfig:
     @staticmethod
-    def openconnection():
-        conn=pymysql.connect(
-            host="localhost",
-            username="root",
+    def open_connection():
+        conn = pymysql.connect(
+            host='localhost',
+            user='root',
             password="1234",
-            db="stu"
+            db='stu',
         )
         return conn
+
     @staticmethod
-    def closeconnection(conn):
+    def close_connection(conn):
         return conn.close()
