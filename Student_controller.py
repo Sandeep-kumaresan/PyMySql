@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request,jsonify
 
 from Student_service import student_service
 from Student import Student
@@ -25,6 +25,19 @@ def get_all_students():
 @app.route('/user/<int:reg_no>', methods=['GET'])
 def get_student(user_id):
     pass
+
+@app.route('/delete_user/<int:reg_no>', methods=['DELETE'])
+def delete_user(reg_no):
+    service.delete_user(reg_no)
+    return jsonify({'message': 'User deleted successfully', 'id': reg_no})
+
+@app.route('/update_user/<int:reg_no>', methods=['PUT'])
+def update_user(reg_no):
+    data = request.get_json()
+    user = Student(reg_no, data['name'], data['age'])
+    service.update_user(user)
+    return jsonify({'message': 'User updated successfully', 'id': reg_no})
+
 
 @app.route('/')
 def hello():

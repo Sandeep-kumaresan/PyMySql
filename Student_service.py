@@ -26,3 +26,18 @@ class student_service:
                     (student.reg_no, student.name, student.age))
         print(conn.insert_id())
         conn.commit()
+
+    def update_student(self,student):
+        conn=dbconfig.open_connection()
+        cur=conn.cursor()
+        cur.execute("""UPDATE student
+        set reg_no= %s,name = %s,age = %s where id = &s""",
+                    (student.reg_no,student.name,student.age))
+        conn.commit()
+        conn.close()
+
+    def delete_user(self,user_id):
+        conn = dbconfig.open_connection()
+        cur = conn.cursor()
+        cur.execute("DELETE from student where id = " + str(user_id))
+        conn.commit()
