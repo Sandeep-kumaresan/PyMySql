@@ -22,20 +22,21 @@ def get_all_students():
     student_list = service.get_students()
     return student_list
 
-@app.route('/user/<int:reg_no>', methods=['GET'])
-def get_student(user_id):
-    pass
+@app.route('/students/<int:reg_no>', methods=['GET'])
+def get_student(reg_no):
+    user = service.get_student(reg_no)
+    return user
 
 @app.route('/delete_user/<int:reg_no>', methods=['DELETE'])
 def delete_user(reg_no):
-    service.delete_user(reg_no)
+    service.delete_student(reg_no)
     return jsonify({'message': 'User deleted successfully', 'id': reg_no})
 
 @app.route('/update_user/<int:reg_no>', methods=['PUT'])
-def update_user(reg_no):
+def update_student(reg_no):
     data = request.get_json()
     user = Student(reg_no, data['name'], data['age'])
-    service.update_user(user)
+    service.update_student(user)
     return jsonify({'message': 'User updated successfully', 'id': reg_no})
 
 

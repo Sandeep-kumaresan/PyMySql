@@ -12,7 +12,7 @@ class Student:
         self.age = age
 
     def __str__(self) -> str:
-        return f"{self.reg_no}-{self.name}-{self.age}"
+        return f"({self.reg_no}-{self.name}-{self.age})"
 
     def to_json(obj):
         return json.dumps(obj, default=lambda obj: obj.__dict__)
